@@ -42,6 +42,8 @@ lambda = 0.1;
 num_labels = 3;
 
 y = y';
+%remove goals
+X = X(:,1:24)
 [all_theta] = oneVsAll(X, y, num_labels, lambda);
 
 fprintf('Program paused. Press enter to continue.\n');

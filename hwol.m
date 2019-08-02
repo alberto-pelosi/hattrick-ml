@@ -55,3 +55,7 @@ pause;
 pred = predictOneVsAll(all_theta, X);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
+
+prova = [1 16 4 17 8 17 7 15 7 8 5 9 6 9 5 9 4 10 0 0 0 0 0 0]
+
+pred = predictOneVsAll(all_theta, prova)

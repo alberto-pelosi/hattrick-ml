@@ -1,14 +1,14 @@
-function [y] = ylogisticcreator(Xdq)
+function [ydq] = ylogisticcreator(Xdq)
 
 rs = rows(Xdq);
-y = [];
+ydq = [];
 for i = 1: rs
 	if(Xdq(i,25) == Xdq(i, 26))
-		y = [y, 0];
+		ydq = [ydq, 0];
 	elseif (Xdq(i,25) > Xdq(i, 26))
-		y = [y, 1];
+		ydq = [ydq, 1];
 	else 
-		y = [y, 2];
+		ydq = [ydq, 2];
 	endif
 end
 

@@ -15,25 +15,40 @@ Xdq = dataquality(X);
 
 
 
-y = ylogisticcreator(Xdq);
+ydq = ylogisticcreator(Xdq);
 
 lambda = 0.1;
 num_labels = 3;
 
-y = y';
+ydq = ydq';
 %remove goals
 Xdq = Xdq(:,1:24);
-[all_theta] = oneVsAll(Xdq, y, num_labels, lambda);
+
+[Xdqtrain, ydqtrain, Xdqcv, ydqcv, Xdqtest, ydqtest] = datasetExtractor(Xdq, ydq);
+
+[all_theta] = oneVsAll(Xdqtrain, ydqtrain, num_labels, lambda);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
 
+
+
 %% ================ Part 3: Predict for One-Vs-All ================
 %  After ...
-pred = predictOneVsAll(all_theta, Xdq);
 
-fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
+predtrain = predictOneVsAll(all_theta, Xdqtrain);
+
+fprintf('\nTraining Set Accuracy: %f\n', mean(double(predtrain == ydqtrain)) * 100);
+
+
+predcv = predictOneVsAll(all_theta, Xdqcv);
+
+fprintf('\nCross Validation Set Accuracy: %f\n', mean(double(predcv == ydqcv)) * 100);
+
+predtest = predictOneVsAll(all_theta, Xdqtest);
+
+fprintf('\nTest Set Accuracy: %f\n', mean(double(predtest == ydqtest)) * 100);
 
 prova = [1 16 4 17 8 17 7 15 7 8 5 9 6 9 5 9 4 10 0 0 0 0 0 0]
 

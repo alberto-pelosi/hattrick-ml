@@ -17,7 +17,7 @@ Xdq = dataquality(X);
 
 ydq = ylogisticcreator(Xdq);
 
-lambda = 0.1;
+lambda = 0.0;
 num_labels = 3;
 
 ydq = ydq';

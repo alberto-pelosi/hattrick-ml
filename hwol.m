@@ -27,11 +27,14 @@ Xdq = Xdq(:,1:24);
 [Xdqtrain, ydqtrain, Xdqcv, ydqcv, Xdqtest, ydqtest] = datasetExtractor(Xdq, ydq);
 
 
+
+
+subplot(1,2,1)
 homecol = [1 3 5 7 9 11 13 15 17 19 21 23];
 awaycol = [2 4 6 8 10 12 14 16 18 20 22 24];
 
 [homeaway] = featureVisualizationExtractor(Xdqtrain, homecol, awaycol);
-figure(1);
+
 plot2Ddata(homeaway, ydqtrain);
 
 title('2D visualization: sum of all features');
@@ -39,12 +42,12 @@ xlabel('Sum of all home team features');
 ylabel('Sum of all away team features');
 legend('home team win', 'draw', 'away team win')
 
-
+subplot(1,2,2)
 homemeaningfulcol = [1 3 5 7 9 11 13 15 17];
 awaymeaningfulcol = [2 4 6 8 10 12 14 16 18];
 
 [homeaway] = featureVisualizationExtractor(Xdqtrain, homemeaningfulcol, awaymeaningfulcol);
-figure(2);
+
 plot2Ddata(homeaway, ydqtrain);
 
 title('2D visualization: sum of meaningful features');

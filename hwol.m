@@ -26,16 +26,24 @@ Xdq = Xdq(:,1:24);
 
 [Xdqtrain, ydqtrain, Xdqcv, ydqcv, Xdqtest, ydqtest] = datasetExtractor(Xdq, ydq);
 
+
+[homeaway] = featureVisualizationExtractor(Xdq);
+
+plot2Ddata(homeaway, ydqtrain);
+
+xlabel('Sum of all home team features');
+ylabel('Sum of all away team features');
+legend('home team win', 'draw', 'away team win')
+
+%Train set 2D visualization.
+%X axis: the sum of the features of home team
+%Y axis: the sum of the features of away team
+
 [all_theta] = oneVsAll(Xdqtrain, ydqtrain, num_labels, lambda);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
-
-
-
-%% ================ Part 3: Predict for One-Vs-All ================
-%  After ...
 
 predtrain = predictOneVsAll(all_theta, Xdqtrain);
 

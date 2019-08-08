@@ -30,37 +30,24 @@ C = Xdqtrain == 0
 
 
 
-homecol = [1 3 5 7 9 11 13 15 17];
-awaycol = [2 4 6 8 10 12 14 16 18];
+homemeaningfulcol = [1 3 5 7 9 11 13 15 17];
+awaymeaningfulcol = [2 4 6 8 10 12 14 16 18];
 
-[homeaway] = featureVisualizationExtractor(Xdqtrain, homecol, awaycol);
+[homeaway] = featureVisualizationExtractor(Xdqtrain, homemeaningfulcol, awaymeaningfulcol);
 
-subplot(2,2,1);
+subplot(1,3,1);
 
 hist(homeaway(:,1), 30);
 title('Histogram of the sum of the home team meaningful features');
 
-subplot(2,2,2);
+subplot(1,3,2);
 
 hist(homeaway(:,2), 30);
 title('Histogram of the sum of the away team meaningful features');
 
-subplot(2,2,3);
-homecol = [1 3 5 7 9 11 13 15 17 19 21 23];
-awaycol = [2 4 6 8 10 12 14 16 18 20 22 24];
 
-[homeaway] = featureVisualizationExtractor(Xdqtrain, homecol, awaycol);
+subplot(1,3,3);
 
-plot2Ddata(homeaway, ydqtrain);
-
-title('2D visualization: sum of all features');
-xlabel('Sum of all home team features');
-ylabel('Sum of all away team features');
-legend('home team win', 'draw', 'away team win', "location", "northeastoutside")
-
-subplot(2,2,4);
-homemeaningfulcol = [1 3 5 7 9 11 13 15 17];
-awaymeaningfulcol = [2 4 6 8 10 12 14 16 18];
 
 [homeaway] = featureVisualizationExtractor(Xdqtrain, homemeaningfulcol, awaymeaningfulcol);
 

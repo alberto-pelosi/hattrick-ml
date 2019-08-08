@@ -26,6 +26,8 @@ Xdq = Xdq(:,1:24);
 
 [Xdqtrain, ydqtrain, Xdqcv, ydqcv, Xdqtest, ydqtest] = datasetExtractor(Xdq, ydq);
 
+C = Xdqtrain == 0
+
 
 
 homecol = [1 3 5 7 9 11 13 15 17];

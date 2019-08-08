@@ -2,17 +2,14 @@ function [Xdq] = dataquality(X)
 
 Xdq =  X(2:end, 2:end);
 
-rs = rows(X);
+rs = rows(Xdq);
 %remove invalid rows
 toRemove = [];
 for i=1: rs
-	if (X(i,1)==0 && X(i,2)==0 && X(i,3)==0 && X(i,4)==0 && X(i,5)==0 && X(i,6)==0 && X(i,7)==0 && X(i,8)==0 && X(i,9)==0 && X(i,10)==0 && X(i,11)==0 && X(i,12)==0 && X(i,13)==0 && X(i,14)==0 && X(i,15)==0 && X(i,16)==0 && X(i,17)==0 && X(i,18)==0 && X(i,19)==0 && X(i,20)==0 && X(i,21)==0 && X(i,22)==0 && X(i,23)==0 && X(i,24)==0 && X(i,25)==0 && X(i,26)==0)
+	if (Xdq(i,1)==0 && Xdq(i,2)==0 && Xdq(i,3)==0 && Xdq(i,4)==0 && Xdq(i,5)==0 && Xdq(i,6)==0 && Xdq(i,7)==0 && Xdq(i,8)==0 && Xdq(i,9)==0 && Xdq(i,10)==0 && Xdq(i,11)==0 && Xdq(i,12)==0 && Xdq(i,13)==0 && Xdq(i,14)==0 && Xdq(i,15)==0 && Xdq(i,16)==0 && Xdq(i,17)==0 && Xdq(i,18)==0 && Xdq(i,19)==0 && Xdq(i,20)==0 && Xdq(i,21)==0 && Xdq(i,22)==0 && Xdq(i,23)==0 && Xdq(i,24)==0 && Xdq(i,25)==0 && Xdq(i,26)==0)
 		toRemove = [toRemove, i];
 	endif
 end
-
-
-Xdq(toRemove,:)=[];
 
 
 end

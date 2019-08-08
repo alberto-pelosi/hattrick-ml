@@ -35,9 +35,8 @@ awaymeaningfulcol = [2 4 6 8 10 12 14 16 18];
 
 [homeaway] = featureVisualizationExtractor(Xdqtrain, homemeaningfulcol, awaymeaningfulcol);
 
-subplot(1,3,1);
-
-homeaway(:,1)
+figure(1)
+subplot(1,2,1);
 
 
 hist(homeaway(:,1));
@@ -45,13 +44,55 @@ hist(homeaway(:,1));
 
 title('Histogram of the sum of the home team meaningful features');
 
-subplot(1,3,2);
+subplot(1,2,2);
 
 hist(homeaway(:,2));
 title('Histogram of the sum of the away team meaningful features');
 
+figure(2)
 
-subplot(1,3,3);
+
+homedefencemeaningfulcol = [3 5 7 15];
+awaydefencemeaningfulcol = [4 6 8 16];
+
+[homeawaydefence] = featureVisualizationExtractor(Xdqtrain, homedefencemeaningfulcol, awaydefencemeaningfulcol);
+
+subplot(2,2,1);
+plot2Ddata(homeawaydefence, ydqtrain);
+
+title('2D visualization: sum of meaningful defence features');
+xlabel('Sum of meaningful home team defence features');
+ylabel('Sum of meaningful away team defence features');
+legend('home team win', 'draw', 'away team win', "location", "northeastoutside")
+
+
+homemidfieldmeaningfulcol = [1];
+awaymidfieldmeaningfulcol = [2];
+
+[homeawaymidfield] = featureVisualizationExtractor(Xdqtrain, homemidfieldmeaningfulcol, awaymidfieldmeaningfulcol);
+
+subplot(2,2,2);
+plot2Ddata(homeawaymidfield, ydqtrain);
+
+title('2D visualization: sum of meaningful midfield features');
+xlabel('Sum of meaningful home team midfield features');
+ylabel('Sum of meaningful away team midfield features');
+legend('home team win', 'draw', 'away team win', "location", "northeastoutside")
+
+homeattackmeaningfulcol = [9 11 13 17];
+awayattackmeaningfulcol = [10 12 14 18];
+
+[homeawayattack] = featureVisualizationExtractor(Xdqtrain, homeattackmeaningfulcol, awayattackmeaningfulcol);
+
+subplot(2,2,3);
+plot2Ddata(homeawayattack, ydqtrain);
+
+title('2D visualization: sum of meaningful attack features');
+xlabel('Sum of meaningful home team attack features');
+ylabel('Sum of meaningful away team attack features');
+legend('home team win', 'draw', 'away team win', "location", "northeastoutside")
+
+subplot(2,2,4);
 
 plot2Ddata(homeaway, ydqtrain);
 

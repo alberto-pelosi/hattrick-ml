@@ -6,6 +6,9 @@ X = dlmread('Datos_HT.csv',';');
 Xdq = dataquality(X);
 
 
+
+
+
 %create y:
 
 % 0 draw
@@ -21,13 +24,10 @@ lambda = 0.0;
 num_labels = 3;
 
 ydq = ydq';
-%remove goals
-Xdq = Xdq(:,1:24);
+%remove useless features
+Xdq = Xdq(:,1:18);
 
 [Xdqtrain, ydqtrain, Xdqcv, ydqcv, Xdqtest, ydqtest] = datasetExtractor(Xdq, ydq);
-
-C = Xdqtrain == 0
-
 
 
 homemeaningfulcol = [1 3 5 7 9 11 13 15 17];
@@ -37,19 +37,21 @@ awaymeaningfulcol = [2 4 6 8 10 12 14 16 18];
 
 subplot(1,3,1);
 
-hist(homeaway(:,1), 30);
+homeaway(:,1)
+
+
+hist(homeaway(:,1));
+
+
 title('Histogram of the sum of the home team meaningful features');
 
 subplot(1,3,2);
 
-hist(homeaway(:,2), 30);
+hist(homeaway(:,2));
 title('Histogram of the sum of the away team meaningful features');
 
 
 subplot(1,3,3);
-
-
-[homeaway] = featureVisualizationExtractor(Xdqtrain, homemeaningfulcol, awaymeaningfulcol);
 
 plot2Ddata(homeaway, ydqtrain);
 
@@ -81,6 +83,6 @@ predtest = predictOneVsAll(all_theta, Xdqtest);
 
 fprintf('\nTest Set Accuracy: %f\n', mean(double(predtest == ydqtest)) * 100);
 
-prova = [1 16 4 17 8 17 7 15 7 8 5 9 6 9 5 9 4 10 0 0 0 0 0 0]
+prova = [1 16 4 17 8 17 7 15 7 8 5 9 6 9 5 9 4 10]
 
 pred = predictOneVsAll(all_theta, prova)

@@ -169,7 +169,7 @@ pred = predict(Theta1, Theta2, Xdqcv);
 
 fprintf('Cross validation Set Accuracy: %f\n', mean(double(pred == ydqcv)) * 100);
 
-pred = predict(Theta1, Theta2, Xdqtest);
+pred = predict(Theta1, Theta2, Xdqtest)
 
 xfail = Xdqtest(find(pred != ydqtest), :);
 ybat = ydqtest(find(pred != ydqtest), :);

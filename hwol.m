@@ -11,9 +11,9 @@ Xdq = dataquality(X);
 
 %create y:
 
-% 0 draw
-% 1 home
-% 2 away
+% 1 draw
+% 2 home
+% 3 away
 
 
 
@@ -127,3 +127,60 @@ fprintf('\nTest Set Accuracy: %f\n', mean(double(predtest == ydqtest)) * 100);
 prova = [1 16 4 17 8 17 7 15 7 8 5 9 6 9 5 9 4 10]
 
 pred = predictOneVsAll(all_theta, prova)
+
+
+%trying neural network
+
+inputlayerdim = size(Xdq, 2);
+%three class: win, draw, lose
+hiddenlayerdim = 9;
+outputlayerdim = 3;
+
+initial_Theta1 = randInitializeWeights(inputlayerdim, hiddenlayerdim);
+initial_Theta2 = randInitializeWeights(hiddenlayerdim, outputlayerdim);
+
+initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
+
+
+lambda = 1;
+
+% Create "short hand" for the cost function to be minimized
+costFunction = @(p) nnCostFunction(p, ...
+                                   inputlayerdim, ...
+                                   hiddenlayerdim, ...
+                                   outputlayerdim, Xdqtrain, ydqtrain, lambda);
+options = optimset('MaxIter', 50);
+
+[nn_params, cost] = fmincg(costFunction, initial_nn_params, options);
+
+% Obtain Theta1 and Theta2 back from nn_params
+Theta1 = reshape(nn_params(1:hiddenlayerdim * (inputlayerdim + 1)), ...
+                 hiddenlayerdim, (inputlayerdim + 1));
+
+Theta2 = reshape(nn_params((1 + (hiddenlayerdim * (inputlayerdim + 1))):end), ...
+                 num_labels, (hiddenlayerdim + 1));
+
+pred = predict(Theta1, Theta2, Xdqtrain);
+
+fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == ydqtrain)) * 100);
+
+
+pred = predict(Theta1, Theta2, Xdqcv);
+
+fprintf('Cross validation Set Accuracy: %f\n', mean(double(pred == ydqcv)) * 100);
+
+pred = predict(Theta1, Theta2, Xdqtest);
+
+xfail = Xdqtest(find(pred != ydqtest), :);
+ybat = ydqtest(find(pred != ydqtest), :);
+ypred = pred(find(pred != ydqtest), :);
+
+esito = [xfail ybat ypred]
+
+fprintf('Test Set Accuracy: %f\n', mean(double(pred == ydqtest)) * 100);
+
+
+prova = [22 19 24 34 27 36 22 32 22 30 39 50 25 21 20 22 20 24]
+
+pred = predict(Theta1, Theta2, prova)
+

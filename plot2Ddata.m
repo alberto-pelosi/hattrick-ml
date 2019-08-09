@@ -1,7 +1,7 @@
 function plot2Ddata(homeaway, ydqtrain)
 
 % Find Indices of Positive and Negative Examples
-draw = find(ydqtrain == 0); homewin = find(ydqtrain == 1); homelose = find(ydqtrain == 2);
+draw = find(ydqtrain == 1); homewin = find(ydqtrain == 2); homelose = find(ydqtrain == 3);
 
 % Plot Examples
 plot(homeaway(homewin, 1), homeaway(homewin, 2), 'ko', 'MarkerFaceColor', 'g', 'MarkerSize', 7)

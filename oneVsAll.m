@@ -54,22 +54,15 @@ options = optimset('GradObj', 'on', 'MaxIter', 50);
 
 
 
-
-
-
-
-
-
-
 % =========================================================================
 
 
-for c = 1:10
+for c = 1:3
 
 	[theta] = fmincg(@(t)(lrCostFunction(t, X, (y == c), lambda)), initial_theta, options);
-
 	all_theta(c,:) = theta';
 endfor
 
+end
 
 
